@@ -2,7 +2,7 @@ import json
 import urllib
 import requests
 
-url = 'https://parseapi.back4app.com/classes/Covid19Case?count=1&limit=10'
+url = 'https://parseapi.back4app.com/classes/Covid19Case?count=1'
 headers = {
     'X-Parse-Application-Id': 'zoZ3zW1YABEWJMPInMwruD5XHgqT4QluDAAVx0Zz', # This is the fake app's application id
     'X-Parse-Master-Key': 'gIo7p0nTyt72aROJqf0ronfzxGKw8Unjw0Zk6qFm' # This is the fake app's readonly master key
