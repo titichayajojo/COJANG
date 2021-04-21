@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
+import Authentication as fAuth
 from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__)
@@ -91,6 +92,7 @@ def update_graph(option_slctd):
     # )
 
     return container, fig
+
 
 
 # ------------------------------------------------------------------------------
