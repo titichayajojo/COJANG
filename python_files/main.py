@@ -6,7 +6,23 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-df = pd.read_csv("codata.csv")
+# df = pd.read_csv("codata.csv")
+# df2 = df[df['date' ] == "2020-03-13"]
+# print(df2)
+
+import dash_core_components as dcc
+
+
+import pandas as pd
+import plotly.express as px  # (version 4.7.0)
+import plotly.graph_objects as go
+
+import dash  # (version 1.12.0) pip install dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+
+app = dash.Dash(__name__)
 
 # ---------- Import and clean data (importing csv into pandas)
 # df = pd.read_csv("intro_bees.csv")
@@ -18,7 +34,6 @@ print(df[:5])
 
 # ------------------------------------------------------------------------------
 # App layout
-
 app.layout = html.Div([
 
     html.H1("Web Application Dashboards with Dash", style={'text-align': 'center'}),
@@ -37,7 +52,22 @@ app.layout = html.Div([
     html.Div(id='output_container', children=[]),
     html.Br(),
 
-    dcc.Graph(id='my_bee_map', figure={})
+    dcc.Graph(id='my_bee_map', figure={}),
+    
+dcc.Slider(
+    min=0,
+    max=10,
+    step=None,
+    marks={
+        0: '0 °F',
+        3: '3 °F',
+        5: '5 °F',
+        7.65: '7.65 °F',
+        10: '10 °F'
+    },
+    value=5
+)  
+
 
 ])
 
@@ -71,30 +101,14 @@ def update_graph(option_slctd):
         labels={'Pct of Colonies Impacted': '% of Bee Colonies'},
         template='plotly_dark'
     )
+    
 
-    # Plotly Graph Objects (GO)
-    # fig = go.Figure(
-    #     data=[go.Choropleth(
-    #         locationmode='USA-states',
-    #         locations=dff['state_code'],
-    #         z=dff["Pct of Colonies Impacted"].astype(float),
-    #         colorscale='Reds',
-    #     )]
-    # )
-    #
-    # fig.update_layout(
-    #     title_text="Bees Affected by Mites in the USA",
-    #     title_xanchor="center",
-    #     title_font=dict(size=24),
-    #     title_x=0.5,
-    #     geo=dict(scope='usa'),
-    # )
+    
 
     return container, fig
-# ------------------------------------------------------------------------------
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
 
     
-# https://youtu.be/hSPmj7mK6ng 
