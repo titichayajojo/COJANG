@@ -1,28 +1,13 @@
 import json
 import pandas as pd
 
-<<<<<<< HEAD
 import dash  # (version 1.12.0) pip install dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-=======
-# usa_states = json.load(open("others/united_state.json",'r'))
-# print(usa_states['features'][1])
-# df = pd.read_csv("codata.csv")
-# df['Cases'] = df['cases']
-# print(df['Cases'])
-# state_id_map = {}
-# for feature in usa_states['features']:
-#     feature['uni_id'] = feature['properties']['STATE']
-#     state_id_map[feature['properties']['NAME']] = feature['uni_id']
-# print(state_id_map)
-# print(df['uni_id'])
->>>>>>> 838ab6b9e7d69dc9630473135b674bbeca3af064
 
 df = pd.read_csv("codata.csv")
 
-<<<<<<< HEAD
 # ---------- Import and clean data (importing csv into pandas)
 # df = pd.read_csv("intro_bees.csv")
 df = pd.read_csv("https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Other/Dash_Introduction/intro_bees.csv")
@@ -113,5 +98,3 @@ if __name__ == '__main__':
 
     
 # https://youtu.be/hSPmj7mK6ng 
-=======
->>>>>>> 838ab6b9e7d69dc9630473135b674bbeca3af064
