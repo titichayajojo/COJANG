@@ -11,7 +11,11 @@ for feature in usa_states['features']:
     feature['uni_id'] = feature['properties']['STATE']
     state_id_map[feature['properties']['NAME']] = feature['uni_id']
 print(state_id_map)
+<<<<<<< Updated upstream
 df['uni_id'] = df['state'].apply(lambda x: state_id_map[x] if state_id_map[x] else )
+=======
+df['uni_id'] = df['state'].apply(lambda x: state_id_map[x] if state_id_map[x] else "No value")
+>>>>>>> Stashed changes
 
 
 
