@@ -18,4 +18,5 @@ choosing_date = {}
 df3 = df[df['date'].map(lambda x: x== "2020-03-13")]
 print(len(df3))
 print(df3['state'].unique())
+print(df3['state'].nunique())
 
