@@ -24,15 +24,16 @@ data = json.loads(path) # Here you have the data that you need
 
 state = None
 cases = None
-date = None
+date = ''
 
 for i in data:
     if(i['casesByState'] != [] and len(i['casesByState']) == len(states)):
-        for j in range(len(i['casesByState'])):
-            state = states[j]
-            cases = i['casesByState'][j]['casesReported']
-            date = i['lastUpdatedAtSource']
-            obj.writerow((state, cases, date[:10]))
+        if(date[:10] != i['lastUpdatedAtSource'][:10]):
+            for j in range(len(i['casesByState'])):
+                state = states[j]
+                cases = i['casesByState'][j]['casesReported']
+                date = i['lastUpdatedAtSource']
+                obj.writerow((state, cases, date[:10]))
 
 csvfile.close() 
 print("done")
