@@ -32,7 +32,7 @@ for i in data:
             state = states[j]
             cases = i['casesByState'][j]['casesReported']
             date = i['lastUpdatedAtSource']
-            obj.writerow((state, cases, date))
+            obj.writerow((state, cases, date[:10]))
 
 csvfile.close() 
 print("done")
