@@ -107,11 +107,6 @@ def update_graph(option_slctd):
     
 
     return container, fig
-<<<<<<< HEAD
-
-=======
-# -------------------------------------------------------------------------------
->>>>>>> 8f21620bc0934d5ecb6cecef73065cf7c3a11293
 
 if __name__ == '__main__':
     app.run_server(debug=True)
