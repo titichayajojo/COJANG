@@ -6,6 +6,7 @@ import pyrebase
 import csv
 
 states = []
+islands = [2, 12, 22, 26, 39, 43, 45, 53]
 url = 'https://api.apify.com/v2/datasets/FIbyK6uHUntt2kNy3/items?format=json&clean=1'
 headers = {
     'X-Parse-Application-Id': 'zoZ3zW1YABEWJMPInMwruD5XHgqT4QluDAAVx0Zz', # This is the fake app's application id
@@ -30,6 +31,8 @@ for i in data:
     if(i['casesByState'] != [] and len(i['casesByState']) == len(states)):
         if(date[:10] != i['lastUpdatedAtSource'][:10]):
             for j in range(len(i['casesByState'])):
+                if j in islands:
+                    continue
                 state = states[j]
                 cases = i['casesByState'][j]['casesReported']
                 date = i['lastUpdatedAtSource']
