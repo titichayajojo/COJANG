@@ -30,11 +30,15 @@ class Users(db.Model):
     password = db.Column(db.String(80))
 Users_tbl = Table('users', Users.metadata)
 
+<<<<<<< HEAD
 #fuction to create table using Users class
 def create_users_table():
     Users.metadata.create_all(engine)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+=======
+app = dash.Dash(__name__)
+>>>>>>> 70e9ecd7219266ee015174c738a572755ce74582
 server = app.server
 app.config.suppress_callback_exceptions = True
 
