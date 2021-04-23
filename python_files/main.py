@@ -7,6 +7,10 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import dash_table
 
+ALLOWED_TYPES = (
+    "text", "number", "password", "email", "search",
+    "tel", "url", "range", "hidden",
+)
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/solar.csv')
 
@@ -55,27 +59,17 @@ app.layout = html.Div(children=[
     # New Div for all elements in the new 'row' of the page
     html.Div([
         html.H1(children='Hello Dash'),
-
-     dcc.Dropdown(
-    options=[
-        {'label': '2020', 'value': 'NYC', 'disabled': True},
-        {'label': '2021', 'value': 'MTL'},
-        
-    ],
-)  ,
 html.Br(),
-
-       dcc.Slider(
-    min=0,
-    max=100,
-    value=65,
-    marks={
-        0: {'label': '0 °C', 'style': {'color': '#77b0b1'}},
-        26: {'label': '26 °C'},
-        37: {'label': '37 °C'},
-        100: {'label': '100 °C', 'style': {'color': '#f50'}}
-    }
-)  ,
+        dcc.Input(id="dfalse", type="number", placeholder="year", min=2020, max=2021),
+        dcc.Input(
+            id="dtrue", type="text",
+            debounce=True, placeholder="month",
+        ),
+        dcc.Input(
+            id="input_range", type="text", placeholder="day",
+            min=1, max=31, step=3,
+        )
+,
     ], className='row'),
     # ff.create_table(table_data, height_constant=60)
 
