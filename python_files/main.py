@@ -7,6 +7,35 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import dash_table
 
+
+import dash 
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+import json
+import pandas as pd
+import csv
+import math
+import plotly.express as px 
+
+
+year = 2020
+month = 5
+day = 11
+df2 = pd.read_csv("codata.csv")
+df2['cases'] = df2['cases'].fillna(0)
+sp  =df2[(df2['year'] == year ) & (df2['month'] == month) & (df2['day'] == day)]
+state_id_map = {}
+usa_states = json.load(open("others/usa5m.json",'r'))
+for feature in usa_states['features']:
+    feature['id'] = feature['properties']['STATE']
+    state_id_map[feature['properties']['NAME']] = feature['id']
+df2['id'] = df2['state'].apply(lambda x : state_id_map[x])
+print(df2.head(10))
+
+
+
+
 ALLOWED_TYPES = (
     "text", "number", "password", "email", "search",
     "tel", "url", "range", "hidden",
@@ -31,18 +60,16 @@ fig = px.bar(df_bar, x="Fruit", y="Amount", color="City", barmode="group")
 app.layout = html.Div(children=[
     # All elements from the top of the page
     html.Div([
-        html.Div([
-            html.H1(children='Hello Dash'),
+        # html.Div([
+        #     html.H1(children='Hello Dash'),
 
-            html.Div(children='''
-                Dash: A web application framework for Python.
-            '''),
-
-            dcc.Graph(
-                id='graph1',
-                figure=fig
-            ),  
-        ], className='six columns'),
+        #     html.Div(children='''
+        #         Dash: A web application framework for Python.
+        #     '''),
+        #      px.choropleth(df2,locations = 'id', geojson=usa_states,color='cases'),
+           
+        # ], className='six columns'),
+        px.choropleth(df2,locations = 'id', geojson=usa_states,color='cases'),
         html.Div([
             html.H1(children='Hello Dash'),
 
