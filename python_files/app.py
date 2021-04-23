@@ -24,9 +24,11 @@ class Users(db.Model):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
 Users_tbl = Table('users', Users.metadata)
+
 app = dash.Dash(__name__)
 server = app.server
 app.config.suppress_callback_exceptions = True
+
 # config
 server.config.update(
     SECRET_KEY=os.urandom(12),
