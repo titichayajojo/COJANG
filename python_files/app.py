@@ -1,4 +1,5 @@
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash
 from dash.dependencies import Input, Output, State
@@ -22,11 +23,21 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True, nullable = False)
     email = db.Column(db.String(50), unique=True)
+    age = db.Column(db.Integer, nullable = False)
+    date = db.Column(db.Integer,nullable = False)
+    month = db.Column(db.String(30),nullable = False)
+    year = db.Column(db.Integer,nullable = False)
     password = db.Column(db.String(80))
 Users_tbl = Table('users', Users.metadata)
-app = dash.Dash(__name__)
+
+#fuction to create table using Users class
+def create_users_table():
+    Users.metadata.create_all(engine)
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
 server = app.server
 app.config.suppress_callback_exceptions = True
+
 # config
 server.config.update(
     SECRET_KEY=os.urandom(12),
@@ -42,22 +53,56 @@ login_manager.login_view = '/login'
 # Create User class with UserMixin
 class Users(UserMixin, Users):
     pass
-create = html.Div([ html.H1('Create User Account')
+create = html.Div([
+    dbc.Row(dbc.Col(html.H1('Create User Account'), 
+        width={'size':6, 'offset':4}), 
+        style={'margin-bottom' : '50px',
+        'margin-top' : '20px'},)
         , dcc.Location(id='create_user', refresh=True)
-        , dcc.Input(id="username"
+        ,html.P('username', style={'margin-left':650})
+        , dbc.Row(dbc.Col(dbc.Input(id="username"
             , type="text"
-            , placeholder="user name"
-            , maxLength =15)
-        , dcc.Input(id="password"
+            , placeholder="Enter your username"
+            , maxLength =15), 
+            width={'size':3 ,'offset':4 },
+            style={'margin-bottom' : '20px'}),)
+
+        , dbc.Row(dbc.Col(dbc.Input(id="password"
             , type="password"
-            , placeholder="password")
-        , dcc.Input(id="email"
+            , placeholder="password"), 
+            width={'size':3 ,'offset':4 }),)
+
+        , dbc.Row(dbc.Col(dbc.Input(id="email"
             , type="email"
             , placeholder="email"
-            , maxLength = 50)
-        , html.Button('Create User', id='submit-val', n_clicks=0)
+            , maxLength = 50),
+            width={'size':3, 'offset': 4},
+            style={'margin-top':'20px'}),)
+
+        , dbc.Row(dbc.Col(dbc.Input(id="age", type="number", placeholder="age", min=1, max=100),
+        width={'size':1 , 'offset':4},
+        style={'margin-top':'20px'}),)
+
+        ,dbc.Row([
+            dbc.Col(dbc.Input(id="date",type="number",placeholder="date",min=1,max=31),
+            width={'size':1,'offset':4},
+            style={'margin-top':'20px'}),
+
+            dbc.Col(dbc.Input(id="month",type="text",placeholder="month"),
+            width={'size':1},
+            style={'margin-top':'20px'}),
+
+            dbc.Col(dbc.Input(id="year",type="number",placeholder="year",min=1800,max=2021),
+            width={'size':1},
+            style={'margin-top':'20px'})],
+        )
+
+        , dbc.Row(dbc.Col(dbc.Button('Create User',color="primary", id='submit-val', n_clicks=0),
+        width={'size':3,'offset':5},style={'margin-top':'20px','margin-top':'40px'}),)
         , html.Div(id='container-button-basic')
     ])#end div
+
+
 login =  html.Div([dcc.Location(id='url_login', refresh=True)
             , html.H2('''Please log in to continue:''', id='h1')
             , dcc.Input(placeholder='Enter your username',
@@ -138,11 +183,11 @@ def display_page(pathname):
 @app.callback(
    [Output('container-button-basic', "children")]
     , [Input('submit-val', 'n_clicks')]
-    , [State('username', 'value'), State('password', 'value'), State('email', 'value')])
-def insert_users(n_clicks, un, pw, em):
+    , [State('username', 'value'), State('password', 'value'), State('email', 'value'), State('age','value'), State('date','value'), State('month','value'), State('year','value')])
+def insert_users(n_clicks, un, pw, em, ag, dt, mn, yr):
     hashed_password = generate_password_hash(pw, method='sha256')
-    if un is not None and pw is not None and em is not None:
-        ins = Users_tbl.insert().values(username=un,  password=hashed_password, email=em,)
+    if un is not None and pw is not None and em is not None and ag is not None:
+        ins = Users_tbl.insert().values(username=un,  password=hashed_password, email=em, age=ag, date=dt, month=mn, year=yr)
         conn = engine.connect()
         conn.execute(ins)
         conn.close()
@@ -201,6 +246,10 @@ def logout_dashboard(n_clicks):
 
 
 if __name__ == '__main__':
+    #create the table
+    #create_users_table()
+    
+    
     c = conn.cursor()
     df = pd.read_sql('select * from users', conn)
     print(df)
