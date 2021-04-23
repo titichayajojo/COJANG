@@ -22,23 +22,20 @@ config = configparser.ConfigParser()
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True, nullable = False)
-    email = db.Column(db.String(50), unique=True)
-    age = db.Column(db.Integer, nullable = False)
-    date = db.Column(db.Integer,nullable = False)
-    month = db.Column(db.String(30),nullable = False)
-    year = db.Column(db.Integer,nullable = False)
     password = db.Column(db.String(80))
+    email = db.Column(db.String(50), unique=True)
+    age = db.Column(db.Integer)
+    date = db.Column(db.Integer)
+    month = db.Column(db.String(20))
+    year = db.Column(db.Integer)
+    
 Users_tbl = Table('users', Users.metadata)
 
-<<<<<<< HEAD
 #fuction to create table using Users class
 def create_users_table():
     Users.metadata.create_all(engine)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
-=======
-app = dash.Dash(__name__)
->>>>>>> 70e9ecd7219266ee015174c738a572755ce74582
 server = app.server
 app.config.suppress_callback_exceptions = True
 
@@ -62,83 +59,99 @@ create = html.Div([
         width={'size':6, 'offset':4}), 
         style={'margin-bottom' : '50px',
         'margin-top' : '20px'},)
+
         , dcc.Location(id='create_user', refresh=True)
-        ,html.P('username', style={'margin-left':650})
+
+        ,dbc.Row(dbc.Col(html.P('Username'),width={'size':1 , 'offset':4}))
+
         , dbc.Row(dbc.Col(dbc.Input(id="username"
             , type="text"
-            , placeholder="Enter your username"
+            , placeholder="username"
             , maxLength =15), 
             width={'size':3 ,'offset':4 },
             style={'margin-bottom' : '20px'}),)
 
+        ,dbc.Row(dbc.Col(html.P('Password'),width={'size':1 , 'offset':4}))
         , dbc.Row(dbc.Col(dbc.Input(id="password"
             , type="password"
             , placeholder="password"), 
-            width={'size':3 ,'offset':4 }),)
+            width={'size':3 ,'offset':4 },
+            style={'margin-bottom' : '20px'}),)
 
+        ,dbc.Row(dbc.Col(html.P('Email'),width={'size':1 , 'offset':4}))
         , dbc.Row(dbc.Col(dbc.Input(id="email"
             , type="email"
             , placeholder="email"
             , maxLength = 50),
             width={'size':3, 'offset': 4},
-            style={'margin-top':'20px'}),)
+            style={'margin-bottom':'20px'}),)
 
+        ,dbc.Row(dbc.Col(html.P('Age'),width={'size':1 , 'offset':4}))
         , dbc.Row(dbc.Col(dbc.Input(id="age", type="number", placeholder="age", min=1, max=100),
         width={'size':1 , 'offset':4},
-        style={'margin-top':'20px'}),)
+        style={'margin-bottom':'20px'}),)
+
+        ,dbc.Row([
+            dbc.Col(html.Div("Date"),width={"size":1, "offset": 4}),
+            dbc.Col(html.Div("Month"),width={"size":1}),
+            dbc.Col(html.Div("Year"),width={"size":1}),
+        ],style={"margin-bottom":"10px"})
 
         ,dbc.Row([
             dbc.Col(dbc.Input(id="date",type="number",placeholder="date",min=1,max=31),
             width={'size':1,'offset':4},
-            style={'margin-top':'20px'}),
+            style={'margin-bottom':'20px'}),
 
             dbc.Col(dbc.Input(id="month",type="text",placeholder="month"),
             width={'size':1},
-            style={'margin-top':'20px'}),
+            style={'margin-bottom':'20px'}),
 
             dbc.Col(dbc.Input(id="year",type="number",placeholder="year",min=1800,max=2021),
             width={'size':1},
-            style={'margin-top':'20px'})],
+            style={'margin-bottom':'20px'})],
         )
 
         , dbc.Row(dbc.Col(dbc.Button('Create User',color="primary", id='submit-val', n_clicks=0),
-        width={'size':3,'offset':5},style={'margin-top':'20px','margin-top':'40px'}),)
+        width={'size':3,'offset':5},style={'margin-top':'20px','margin-bottom':'40px'}),)
         , html.Div(id='container-button-basic')
     ])#end div
 
 
 login =  html.Div([dcc.Location(id='url_login', refresh=True)
-            , html.H2('''Please log in to continue:''', id='h1')
-            , dcc.Input(placeholder='Enter your username',
+            , dbc.Row(dbc.Col(html.H1('''Please log in to continue''', id='h1'),width={"offset":4},style={"margin-top":"20px","margin-bottom":"50px"}))
+            , dbc.Row(dbc.Col(dbc.Input(placeholder='username',
                     type='text',
-                    id='uname-box')
-            , dcc.Input(placeholder='Enter your password',
+                    id='uname-box'),width={"offset":5},style={"margin-bottom":"20px"}))
+            , dbc.Row(dbc.Col(dbc.Input(placeholder='password',
                     type='password',
-                    id='pwd-box')
-            , html.Button(children='Login',
+                    id='pwd-box'),width={"offset":5},style={"margin-bottom":"20px"}))
+            , dbc.Row(dbc.Col(dbc.Button(children='Login',
+                    color="primary",
                     n_clicks=0,
                     type='submit',
-                    id='login-button')
+                    id='login-button'),width={"offset":5}))
             , html.Div(children='', id='output-state')
+            
         ]) #end div
+
 success = html.Div([dcc.Location(id='url_login_success', refresh=True)
-            , html.Div([html.H2('Login successful.')
+            , html.Div([dbc.Row(dbc.Col(html.H2('Login successful'),width={"offset":5},style={"margin-top":"20px","margin-bottom" :"50px"}))
                     , html.Br()
-                    , html.P('Select a Dataset')
-                    , dcc.Link('Data', href = '/data')
+                    , dbc.Row(dbc.Col(html.P('Select a Dataset'),width={"offset":5},style={"margin-bottom":"20px"}))
+                    , dbc.Row(dbc.Col(dcc.Link('Data', href = '/data'),width={"offset":5},style={"margin-bottom":"20px"}))
                 ]) #end div
             , html.Div([html.Br()
-                    , html.Button(id='back-button', children='Go back', n_clicks=0)
+                    , dbc.Row(dbc.Col(dbc.Button(id='back-button',color="primary", children='Go back', n_clicks=0),width={"offset":5},style={"margin-bottom":"20px"}))
                 ]) #end div
         ]) #end div
 
 
 failed = html.Div([ dcc.Location(id='url_login_df', refresh=True)
-            , html.Div([html.H2('Log in Failed. Please try again.')
+            , html.Div([dbc.Row(dbc.Col(html.H2('Log in Failed. Please try again'),width={"offset":5},style={"margin-top":"20px","margin-bottom" :"50px"}))
                     , html.Br()
                     , html.Div([login])
                     , html.Br()
-                    , html.Button(id='back-button', children='Go back', n_clicks=0)
+                    , dbc.Row(dbc.Col(dbc.Button(id='back-button',color="primary", children='Go back', n_clicks=0),width={"offset":5},style={"margin-bottom":"20px"}))
                 ]) #end div
         ]) #end div
 logout = html.Div([dcc.Location(id='logout', refresh=True)
@@ -187,17 +200,17 @@ def display_page(pathname):
 @app.callback(
    [Output('container-button-basic', "children")]
     , [Input('submit-val', 'n_clicks')]
-    , [State('username', 'value'), State('password', 'value'), State('email', 'value'), State('age','value'), State('date','value'), State('month','value'), State('year','value')])
+    , [State('username', 'value'), State('password', 'value'), State('email', 'value'), State('age', 'value'), State('date', 'value'), State('month', 'value'), State('year', 'value')])
 def insert_users(n_clicks, un, pw, em, ag, dt, mn, yr):
     hashed_password = generate_password_hash(pw, method='sha256')
-    if un is not None and pw is not None and em is not None and ag is not None:
+    if un is not None and pw is not None and em is not None:
         ins = Users_tbl.insert().values(username=un,  password=hashed_password, email=em, age=ag, date=dt, month=mn, year=yr)
         conn = engine.connect()
         conn.execute(ins)
         conn.close()
         return [login]
     else:
-        return [html.Div([html.H2('Already have a user account?'), dcc.Link('Click here to Log In', href='/login')])]
+        return [dbc.Row(dbc.Col(html.Div([html.H5('Already have a user account?'), dcc.Link('Click here to Log In', href='/login')]),width={"offset":4}))]
 @app.callback(
     Output('url_login', 'pathname')
     , [Input('login-button', 'n_clicks')]
@@ -212,6 +225,7 @@ def successful(n_clicks, input1, input2):
             pass
     else:
         pass
+
 @app.callback(
     Output('output-state', 'children')
     , [Input('login-button', 'n_clicks')]
@@ -219,27 +233,37 @@ def successful(n_clicks, input1, input2):
 def update_output(n_clicks, input1, input2):
     if n_clicks > 0:
         user = Users.query.filter_by(username=input1).first()
+
         if user:
             if check_password_hash(user.password, input2):
                 return ''
             else:
-                return 'Incorrect username or password'
+                return [dbc.Row(dbc.Col(html.Div([html.H5('Want to register ?'), 
+                dcc.Link('Click here to register', href='/')]),width={"offset":4},style={"margin-top":"50px"})),
+                dbc.Row(dbc.Col(html.Div(html.P('Incorect username or password')),className="text-warning",width={"offset":5},style={"margin-top":"20px"}))]
         else:
-            return 'Incorrect username or password'
+            return [dbc.Row(dbc.Col(html.Div([html.H5('Want to register ?'), 
+                dcc.Link('Click here to register', href='/')]),width={"offset":4},style={"margin-top":"50px"})),
+                dbc.Row(dbc.Col(html.Div(html.P('Incorect username or password')),className="text-warning",width={"offset":5},style={"margin-top":"20px"}))]
     else:
-        return ''
+        return [dbc.Row(dbc.Col(html.Div([html.H5('Want to register ?'), dcc.Link('Click here to register', href='/')]),width={"offset":4},style={"margin-top":"50px"}))]
+    
+    
+
 @app.callback(
     Output('url_login_success', 'pathname')
     , [Input('back-button', 'n_clicks')])
 def logout_dashboard(n_clicks):
     if n_clicks > 0:
         return '/'
+
 @app.callback(
     Output('url_login_df', 'pathname')
     , [Input('back-button', 'n_clicks')])
 def logout_dashboard(n_clicks):
     if n_clicks > 0:
         return '/'
+
 # Create callbacks
 @app.callback(
     Output('url_logout', 'pathname')
@@ -249,11 +273,12 @@ def logout_dashboard(n_clicks):
         return '/'
 
 
+
+
 if __name__ == '__main__':
     #create the table
     #create_users_table()
-    
-    
+
     c = conn.cursor()
     df = pd.read_sql('select * from users', conn)
     print(df)
