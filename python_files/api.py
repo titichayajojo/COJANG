@@ -19,7 +19,7 @@ states = f.read().split('\n')
 f.close()
 
 obj = csv.writer(csvfile)
-obj.writerow(('state', 'cases', 'date'))
+obj.writerow(('state', 'cases', 'year', 'month', 'day'))
 path = requests.get(url, headers=headers).content.decode('utf-8')
 data = json.loads(path) # Here you have the data that you need
 
@@ -36,7 +36,8 @@ for i in data:
                 state = states[j]
                 cases = i['casesByState'][j]['casesReported']
                 date = i['lastUpdatedAtSource']
-                obj.writerow((state, cases, date[:10]))
+                date = date[:10]
+                obj.writerow((state, cases, date[:4], date[5:7], date[8:19]))
 
 csvfile.close() 
 print("done")
