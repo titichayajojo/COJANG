@@ -1,1 +1,1 @@
-web gunicorn app:cojang
+web gunicorn app:app
