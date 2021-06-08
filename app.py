@@ -14,6 +14,10 @@ from flask_login import login_user, logout_user, current_user, LoginManager, Use
 import configparser
 import pandas as pd
 
+import python_files.test1_boon as activity
+import json
+import plotly.express as px
+
 warnings.filterwarnings("ignore")
 conn = sqlite3.connect('data.sqlite')
 engine = create_engine('sqlite:///data.sqlite')
@@ -184,8 +188,7 @@ def display_page(pathname):
             return failed
     elif pathname =='/data':
         if current_user.is_authenticated:
-            pass
-            #return
+            return activity.layout
     elif pathname == '/logout':
         if current_user.is_authenticated:
             logout_user()
@@ -271,6 +274,37 @@ def logout_dashboard(n_clicks):
 def logout_dashboard(n_clicks):
     if n_clicks > 0:
         return '/'
+
+@app.callback(
+    [dash.dependencies.Output('usa_map', component_property='figure'),
+    dash.dependencies.Output('usa_bar', component_property='figure')
+    ],
+    [dash.dependencies.Input('submit-val2', 'n_clicks')],
+    [dash.dependencies.State('In1', 'value'),
+    dash.dependencies.State('In2', 'value'),
+    dash.dependencies.State('In3', 'value')])
+    
+def update_output(click,in1,in2,in3):
+    year = in3
+    month = in2
+    day = in1
+    df2 = pd.read_csv("codata.csv")
+    df2['cases'] = df2['cases'].fillna(0)
+    sp  =df2[(df2['year'] == year )]
+    sp  =sp[(sp['month'] == month )]
+    sp  =sp[(sp['day'] == day )]
+    print(sp.head(5))
+    state_id_map = {}
+    usa_states = json.load(open("others/usa5m.json",'r'))
+    for feature in usa_states['features']:
+        feature['id'] = feature['properties']['STATE']
+        state_id_map[feature['properties']['NAME']] = feature['id']
+    sp['id'] = sp['state'].apply(lambda x: state_id_map[x])
+    fig = px.choropleth(sp,locations='id',geojson=usa_states,color='cases',scope="usa")
+    fig2 = px.bar(sp,x="state",y="cases")
+    fig2.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+    fig2.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+    return fig,fig2
 
 
 

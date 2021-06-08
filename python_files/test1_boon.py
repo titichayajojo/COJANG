@@ -34,15 +34,12 @@ candidates = df.winner.unique()
 
 
 
-app = dash.Dash(__name__)
-
-
 
 colors = {
     'background': '#BBEEFC',
     'text': '#7FDBFF'
 }
-app.layout = html.Div(style={'backgroundColor': colors['background']},children =[
+layout = html.Div(style={'backgroundColor': colors['background']},children =[
 
     html.H1("Cojung Web Application ", style={'text-align': 'center'}),
     html.Div(id='output_container', children=[]),
@@ -56,7 +53,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children =
          html.Div([html.P('Years', style={"height": "auto", "margin-bottom": "auto"}),
                       dcc.Input(id="In3", type="number", value='', ), ]),
          html.Br(), 
-         html.Button('Submit', id='submit-val', n_clicks=0,style={}),
+         html.Button('Submit', id='submit-val2', n_clicks=0,style={}),
          html.Div(id='container-button-basic',
              children='Enter a value and press submit')
     ]),
@@ -83,47 +80,4 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children =
         ], className="six columns"),
     ], className="row")
 ])
-
-
-
-@app.callback(
-    [dash.dependencies.Output('usa_map', component_property='figure'),
-    dash.dependencies.Output('usa_bar', component_property='figure')
-    ],
-    [dash.dependencies.Input('submit-val', 'n_clicks')],
-    [dash.dependencies.State('In1', 'value'),
-    dash.dependencies.State('In2', 'value'),
-    dash.dependencies.State('In3', 'value')])
-    
-def update_output(click,in1,in2,in3):
-    year = in3
-    month = in2
-    day = in1
-    df2 = pd.read_csv("codata.csv")
-    df2['cases'] = df2['cases'].fillna(0)
-    sp  =df2[(df2['year'] == year )]
-    sp  =sp[(sp['month'] == month )]
-    sp  =sp[(sp['day'] == day )]
-    print(sp.head(5))
-    state_id_map = {}
-    usa_states = json.load(open("others/usa5m.json",'r'))
-    for feature in usa_states['features']:
-        feature['id'] = feature['properties']['STATE']
-        state_id_map[feature['properties']['NAME']] = feature['id']
-    sp['id'] = sp['state'].apply(lambda x: state_id_map[x])
-    fig = px.choropleth(sp,locations='id',geojson=usa_states,color='cases',scope="usa")
-    fig2 = px.bar(sp,x="state",y="cases")
-    fig2.update_traces(texttemplate='%{text:.2s}', textposition='outside')
-    fig2.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
-    return fig,fig2
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
 
