@@ -1,6 +1,7 @@
 
 import dash 
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import json
@@ -39,45 +40,32 @@ colors = {
     'background': '#BBEEFC',
     'text': '#7FDBFF'
 }
-layout = html.Div(style={'backgroundColor': colors['background']},children =[
+layout = html.Div(children =[
 
-    html.H1("Cojung Web Application ", style={'text-align': 'center'}),
+    dbc.Row(dbc.Col(html.H1("Cojung Web Application ", style={'text-align': 'center'}))),
     html.Div(id='output_container', children=[]),
     html.Br(),
     html.Br(),
+    
     html.Div(children =[ 
-         html.Div([html.P('Day', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In1", type="number", value='', ), ]),
-         html.Div([html.P('Month', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In2", type="number", value='', ), ]),
-         html.Div([html.P('Years', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In3", type="number", value='', ), ]),
-         html.Br(), 
-         html.Button('Submit', id='submit-val2', n_clicks=0,style={}),
-         html.Div(id='container-button-basic',
-             children='Enter a value and press submit')
-    ]),
-     dcc.Graph(id="usa_map"),
-     dcc.RadioItems(
-        id='candidate', 
-        options=[{'value': x, 'label': x} 
-                 for x in candidates],
-        value=candidates[0],
-        labelStyle={'display': 'inline-block'}
-    ),
+         dbc.Row(dbc.Col(html.Div([html.P('Day', style={"height": "auto", "margin-bottom": "auto"}),
+                      dcc.Input(id="In1", type="number", value='', ), ]),width={"offset":1},style={"margin-top":"20px"})),
 
+         dbc.Row(dbc.Col(html.Div([html.P('Month', style={"height": "auto", "margin-bottom": "auto"}),
+                      dcc.Input(id="In2", type="number", value='', ), ]) ,width={"offset":1},style={"margin-top":"20px"})),
+         dbc.Row(dbc.Col(html.Div([html.P('Years', style={"height": "auto", "margin-bottom": "auto"}),
+                      dcc.Input(id="In3", type="number", value='', ), ]),width={"offset":1},style={"margin-top":"20px"})),
+         html.Br(), 
+         dbc.Row(dbc.Col(dbc.Button('Submit', id='submit-val2', n_clicks=0,style={},color="primary",type="submit"),width={"offset":1})),
+         
+         dbc.Row(dbc.Col(html.Div(id='container-button-basic',
+             children='Enter a value and press submit'),width={"offset":1},style={"margin-top":"20px"} ))
+    ]),
+     
+    dcc.Graph(id="usa_map"),
+    dcc.Graph(id="usa_bar"),
     
        
-         html.Div([
-        html.Div([
-            html.H3('Column 1'),
-            dcc.Graph(id="usa_bar"),
-        ], className="six columns"),
-
-        html.Div([  
-            html.H3('Column 2'),
-            dcc.Graph(id='g2', figure={'data': [{'y': [1, 2, 3]}]})
-        ], className="six columns"),
-    ], className="row")
+       
 ])
 
