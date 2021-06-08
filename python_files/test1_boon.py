@@ -41,15 +41,10 @@ colors = {
 }
 app.layout = html.Div(style={'backgroundColor': colors['background']},children =[
 
-    html.H1("Web Application Dashboards with Dash", style={'text-align': 'center'}),
+    html.H1("Cojung Web Application ", style={'text-align': 'center'}),
     html.Div(id='output_container', children=[]),
     html.Br(),
-   
-    
     html.Br(),
-
-
-
     html.Div(children =[ 
          html.Div([html.P('Day', style={"height": "auto", "margin-bottom": "auto"}),
                       dcc.Input(id="In1", type="number", value='', ), ]),
@@ -96,22 +91,22 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children =
     dash.dependencies.State('In3', 'value')])
     
 def update_output(click,in1,in2,in3):
-    print(in1)
     year = in3
     month = in2
     day = in1
     df2 = pd.read_csv("codata.csv")
     df2['cases'] = df2['cases'].fillna(0)
-    sp  =df2[(df2['year'] == year ) & (df2['month'] == month) & (df2['day'] == day)]
+    sp  =df2[(df2['year'] == year )]
+    sp  =sp[(sp['month'] == month )]
+    sp  =sp[(sp['day'] == day )]
+    print(sp.head(5))
     state_id_map = {}
     usa_states = json.load(open("others/usa5m.json",'r'))
     for feature in usa_states['features']:
         feature['id'] = feature['properties']['STATE']
         state_id_map[feature['properties']['NAME']] = feature['id']
-    df2['id'] = df2['state'].apply(lambda x : state_id_map[x])
-    print(df2.head(5))
-    print(day,month,year)
-    fig = px.choropleth(locations=["CA", "TX", "NY"], locationmode="USA-states", color=[1,2,3], scope="usa")
+    sp['id'] = sp['state'].apply(lambda x: state_id_map[x])
+    fig = px.choropleth(sp,locations='id',geojson=usa_states,color='cases',scope="usa")
     return fig 
 
 
