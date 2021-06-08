@@ -49,17 +49,17 @@ layout = html.Div(children =[
     
     html.Div(children =[ 
          dbc.Row(dbc.Col(html.Div([html.P('Day', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In1", type="number", value='', ), ]),width={"offset":1},style={"margin-top":"20px"})),
+                      dcc.Input(id="In1", type="number", value='', ), ]),width={"offset":5},style={"margin-top":"20px"})),
 
          dbc.Row(dbc.Col(html.Div([html.P('Month', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In2", type="number", value='', ), ]) ,width={"offset":1},style={"margin-top":"20px"})),
+                      dcc.Input(id="In2", type="number", value='', ), ]) ,width={"offset":5},style={"margin-top":"20px"})),
          dbc.Row(dbc.Col(html.Div([html.P('Years', style={"height": "auto", "margin-bottom": "auto"}),
-                      dcc.Input(id="In3", type="number", value='', ), ]),width={"offset":1},style={"margin-top":"20px"})),
+                      dcc.Input(id="In3", type="number", value='', ), ]),width={"offset":5},style={"margin-top":"20px"})),
          html.Br(), 
-         dbc.Row(dbc.Col(dbc.Button('Submit', id='submit-val2', n_clicks=0,style={},color="primary",type="submit"),width={"offset":1})),
+         dbc.Row(dbc.Col(dbc.Button('Submit', id='submit-val2', n_clicks=0,style={},color="primary",type="submit"),width={"offset":5})),
          
          dbc.Row(dbc.Col(html.Div(id='container-button-basic',
-             children='Enter a value and press submit'),width={"offset":1},style={"margin-top":"20px"} ))
+             children='Enter a value and press submit'),width={"offset":5},style={"margin-top":"20px"} ))
     ]),
      
     dcc.Graph(id="usa_map"),
