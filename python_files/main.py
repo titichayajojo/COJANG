@@ -7,7 +7,7 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import dash_table
 
-
+import dash_leaflet as dl
 import dash 
 import dash_core_components as dcc
 import dash_html_components as html
@@ -34,7 +34,8 @@ df2['id'] = df2['state'].apply(lambda x : state_id_map[x])
 print(df2.head(10))
 
 
-
+url = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+attribution = '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> '
 
 ALLOWED_TYPES = (
     "text", "number", "password", "email", "search",
@@ -56,23 +57,30 @@ df_bar = pd.DataFrame({
 })
 
 fig = px.bar(df_bar, x="Fruit", y="Amount", color="City", barmode="group")
-
+colors = {
+    'background': '#111111',
+    'text': '#7FDBFF'
+}
 app.layout = html.Div(children=[
     # All elements from the top of the page
     html.Div([
-        # html.Div([
-        #     html.H1(children='Hello Dash'),
-
-        #     html.Div(children='''
-        #         Dash: A web application framework for Python.
-        #     '''),
-        #      px.choropleth(df2,locations = 'id', geojson=usa_states,color='cases'),
-           
-        # ], className='six columns'),
-        px.choropleth(df2,locations = 'id', geojson=usa_states,color='cases'),
-        html.Div([
+        
+        html.Div(style={'backgroundColor': colors['background']}[
             html.H1(children='Hello Dash'),
-
+            html.H1(children='Input Time period'),
+            html.Br(),
+            dcc.Input(id="dfalse", type="number", placeholder="year", min=2020, max=2021),
+            dcc.Input(
+            id="dtrue", type="text",
+            debounce=True, placeholder="month",
+        ),
+        dcc.Input(
+            id="input_range", type="text", placeholder="day",
+            min=1, max=31, step=3,
+        ),
+            html.Div([
+            dl.Map(dl.TileLayer(url=url, maxZoom=20, attribution=attribution))
+],      style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block", "position": "relative"}),
             html.Div(children='''
                 Dash: A web application framework for Python.
             '''),
@@ -81,39 +89,11 @@ app.layout = html.Div(children=[
                 id='graph2',
                 figure=fig
             ),  
+            
         ], className='six columns'),
+        
     ], className='row'),
-    # New Div for all elements in the new 'row' of the page
-    html.Div([
-        html.H1(children='Hello Dash'),
-html.Br(),
-        dcc.Input(id="dfalse", type="number", placeholder="year", min=2020, max=2021),
-        dcc.Input(
-            id="dtrue", type="text",
-            debounce=True, placeholder="month",
-        ),
-        dcc.Input(
-            id="input_range", type="text", placeholder="day",
-            min=1, max=31, step=3,
-        )
-,
-    ], className='row'),
-    # ff.create_table(table_data, height_constant=60)
-
-    html.Div([
-        html.H1(children='Hello Dash'),
-
-        html.Div(children='''
-            Dash: A web application framework for Python.
-        '''),
-         dash_table.DataTable(
-    id='table',
-    columns=[{"name": i, "id": i} for i in df.columns],
-    data=df.to_dict('records'),
-)
-
- ,
-    ], className='row'),
+   
 
     
 ])
