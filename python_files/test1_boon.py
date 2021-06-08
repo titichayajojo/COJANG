@@ -10,6 +10,8 @@ import math
 import plotly.express as px 
 from plotly.subplots import make_subplots
 
+import plotly.graph_objects as go
+
 import dash_leaflet as dl
 import dash_leaflet.express as dlx
 from dash_extensions.javascript import Namespace, arrow_function\
@@ -23,7 +25,8 @@ fips = ['06021', '06023', '06027',
         '06055', '06061']
 values = range(len(fips))
 
-
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 df = px.data.election()
 geojson = px.data.election_geojson()
 candidates = df.winner.unique()
@@ -71,7 +74,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children =
          html.Div([
         html.Div([
             html.H3('Column 1'),
-            dcc.Graph(id='g1', figure={})
+            dcc.Graph(id="usa_bar"),
         ], className="six columns"),
 
         html.Div([  
@@ -84,7 +87,9 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},children =
 
 
 @app.callback(
-    dash.dependencies.Output('usa_map', component_property='figure'),
+    [dash.dependencies.Output('usa_map', component_property='figure'),
+    dash.dependencies.Output('usa_bar', component_property='figure')
+    ],
     [dash.dependencies.Input('submit-val', 'n_clicks')],
     [dash.dependencies.State('In1', 'value'),
     dash.dependencies.State('In2', 'value'),
@@ -107,7 +112,10 @@ def update_output(click,in1,in2,in3):
         state_id_map[feature['properties']['NAME']] = feature['id']
     sp['id'] = sp['state'].apply(lambda x: state_id_map[x])
     fig = px.choropleth(sp,locations='id',geojson=usa_states,color='cases',scope="usa")
-    return fig 
+    fig2 = px.bar(sp,x="state",y="cases")
+    fig2.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+    fig2.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+    return fig,fig2
 
 
 
@@ -115,18 +123,6 @@ def update_output(click,in1,in2,in3):
 
 
 
-# @app.callback(
-#      dash.dependencies.Output('us_map', 'children'),
-#      [dash.dependencies.Input('submit-val', 'n_clicks')],
-    
-
-# def map(click):
-#     print(in1)
-#     return ' {}/{}/{} '.format(
-#         in1,
-#         in2,
-#         in3)
-    
 
 if __name__ == '__main__':
     app.run_server(debug=True)
