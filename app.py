@@ -40,9 +40,6 @@ def create_users_table():
     Users.metadata.create_all(engine)
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
-@app.route('/')
-def index():
-    return "<h1>Welcome</h1>"
 server = app.server
 app.config.suppress_callback_exceptions = True
 
