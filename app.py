@@ -81,7 +81,6 @@ failed = Login.failed_function()
 logout = Login.login_function()
 
 
-
 app.layout= html.Div([
             html.Div(id='page-content', className='content')
             ,  dcc.Location(id='url', refresh=False)
@@ -220,7 +219,6 @@ def update_output(click,in1,in2,in3):
     sp['id'] = sp['state'].apply(lambda x: state_id_map[x])
     fig = px.choropleth(sp,locations='id',geojson=usa_states,color='cases',scope="usa")
     fig2 = px.bar(sp,x="state",y="cases")
-    fig2.update_traces(texttemplate='%{text:.2s}', textposition='outside')
     fig2.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     return fig,fig2
 
