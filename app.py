@@ -17,12 +17,22 @@ import pandas as pd
 import python_files.test1_boon as activity
 import json
 import plotly.express as px
+import python_files.api as ap
+
+import python_files.components.create as create_component
+import python_files.components.login as login_component
+import python_files.components.success as success_component
 
 warnings.filterwarnings("ignore")
 conn = sqlite3.connect('data.sqlite')
 engine = create_engine('sqlite:///data.sqlite')
 db = SQLAlchemy()
+
 config = configparser.ConfigParser()
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+server = app.server
+app.config.suppress_callback_exceptions = True
+
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True, nullable = False)
@@ -39,16 +49,17 @@ Users_tbl = Table('users', Users.metadata)
 def create_users_table():
     Users.metadata.create_all(engine)
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
-server = app.server
-app.config.suppress_callback_exceptions = True
+
+class Users(UserMixin, Users):
+    pass
+
 
 # config
 server.config.update(
     SECRET_KEY=os.urandom(12),
     SQLALCHEMY_DATABASE_URI='sqlite:///data.sqlite',
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-)
+    SQLALCHEMY_TRACK_MODIFICATIONS=False)
+
 db.init_app(server)
 # Setup the LoginManager for the server
 login_manager = LoginManager()
@@ -56,136 +67,26 @@ login_manager.init_app(server)
 login_manager.login_view = '/login'
 #User as base
 # Create User class with UserMixin
-class Users(UserMixin, Users):
-    pass
-create = html.Div([
-    dbc.Row(dbc.Col(html.H1('Create User Account'), 
-        width={'size':6, 'offset':4}), 
-        style={'margin-bottom' : '50px',
-        'margin-top' : '20px'},)
-
-        , dcc.Location(id='create_user', refresh=True)
-
-        ,dbc.Row(dbc.Col(html.P('Username'),width={'size':1 , 'offset':4}))
-
-        , dbc.Row(dbc.Col(dbc.Input(id="username"
-            , type="text"
-            , placeholder="username"
-            , maxLength =15), 
-            width={'size':3 ,'offset':4 },
-            style={'margin-bottom' : '20px'}),)
-
-        ,dbc.Row(dbc.Col(html.P('Password'),width={'size':1 , 'offset':4}))
-        , dbc.Row(dbc.Col(dbc.Input(id="password"
-            , type="password"
-            , placeholder="password"), 
-            width={'size':3 ,'offset':4 },
-            style={'margin-bottom' : '20px'}),)
-
-        ,dbc.Row(dbc.Col(html.P('Email'),width={'size':1 , 'offset':4}))
-        , dbc.Row(dbc.Col(dbc.Input(id="email"
-            , type="email"
-            , placeholder="email"
-            , maxLength = 50),
-            width={'size':3, 'offset': 4},
-            style={'margin-bottom':'20px'}),)
-
-        ,dbc.Row(dbc.Col(html.P('Age'),width={'size':1 , 'offset':4}))
-        , dbc.Row(dbc.Col(dbc.Input(id="age", type="number", placeholder="age", min=1, max=100),
-        width={'size':1 , 'offset':4},
-        style={'margin-bottom':'20px'}),)
-
-        ,dbc.Row([
-            dbc.Col(html.Div("Date"),width={"size":1, "offset": 4}),
-            dbc.Col(html.Div("Month"),width={"size":1}),
-            dbc.Col(html.Div("Year"),width={"size":1}),
-        ],style={"margin-bottom":"10px"})
-
-        ,dbc.Row([
-            dbc.Col(dbc.Input(id="date",type="number",placeholder="date",min=1,max=31),
-            width={'size':1,'offset':4},
-            style={'margin-bottom':'20px'}),
-
-            dbc.Col(dbc.Input(id="month",type="text",placeholder="month"),
-            width={'size':1},
-            style={'margin-bottom':'20px'}),
-
-            dbc.Col(dbc.Input(id="year",type="number",placeholder="year",min=1800,max=2021),
-            width={'size':1},
-            style={'margin-bottom':'20px'})],
-        )
-
-        , dbc.Row(dbc.Col(dbc.Button('Create User',color="primary", id='submit-val', n_clicks=0),
-        width={'size':3,'offset':5},style={'margin-top':'20px','margin-bottom':'40px'}),)
-        , html.Div(id='container-button-basic')
-    ])#end div
 
 
-login =  html.Div([dcc.Location(id='url_login', refresh=True)
-            , dbc.Row(dbc.Col(html.H1('''Please log in to continue''', id='h1'),width={"offset":4},style={"margin-top":"20px","margin-bottom":"50px"}))
-            , dbc.Row(dbc.Col(dbc.Input(placeholder='username',
-                    type='text',
-                    id='uname-box'),width={"offset":5},style={"margin-bottom":"20px"}))
-            , dbc.Row(dbc.Col(dbc.Input(placeholder='password',
-                    type='password',
-                    id='pwd-box'),width={"offset":5},style={"margin-bottom":"20px"}))
-            , dbc.Row(dbc.Col(dbc.Button(children='Login',
-                    color="primary",
-                    n_clicks=0,
-                    type='submit',
-                    id='login-button'),width={"offset":5}))
-            , html.Div(children='', id='output-state')
-            
-        ]) #end div
-
-success = html.Div([dcc.Location(id='url_login_success', refresh=True)
-            , html.Div([dbc.Row(dbc.Col(html.H2('WELCOME!'),width={"offset":5},style={"margin-top":"20px","margin-bottom" :"50px"}))
-                    , html.Br()
-                    , dbc.Row(dbc.Col(html.P(["The COVID-19 pandemic, also known as the coronavirus pandemic, is an ongoing global pandemic of coronavirus disease 2019 (COVID-19)", html.Br(), "caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The virus was first identified in December 2019 in Wuhan, China.", html.Br(), " The World Health Organization declared a Public Health Emergency of International Concern regarding COVID-19 on 30 January 2020,", html.Br(), " and later declared a pandemic on 11 March 2020.As of 8 June 2021, more than 173 million cases have been confirmed, with more than 3.73 million", html.Br(), " confirmed deaths attributed to COVID-19, making it one of the deadliest pandemics in history. symptoms of COVID-19 are highly variable,", html.Br(), " ranging from none to life-threateningly severe. COVID-19 transmits when people breathe in air contaminated by droplets and small airborne particles.", html.Br(), " The risk of breathing these in is highest when people are in close proximity, but they can be inhaled over longer distances, particularly indoors.", html.Br(), " Transmission can also occur if splashed or sprayed with contaminated fluids, in the eyes, nose or mouth, and, rarely, via contaminated surfaces.", html.Br(), " People remain contagious for up to 20 days, and can spread the virus even if they do not develop any symptoms."]),width={"offset":3},style={"margin-right":"20px"}))
-                    
-                ]) #end div
-                ,dbc.Row(dbc.Col(dbc.Card(
-            [
-        dbc.CardImg(src="/assets/Corona-19virus.jpg", top=True),
-        dbc.CardBody(
-            [
-                html.H4("Cojung Map", className="card-title"),
-                html.P(
-                    "Covid-19 in the United States of America"
-                    "Dash Board from 13-03-2020 to current date (Last Update).",
-                    className="card-text",
-                ),
-                dcc.Link('DashBoard', href = '/data'),
-            ]
-        ),
-    ],
-    style={"width": "18rem"},
-),width={"offset":5},style={"margin-bottom":"20px"}))
-            , html.Div([html.Br()
-                    , dbc.Row(dbc.Col(dbc.Button(id='back-button',color="primary", children='Go back', n_clicks=0),width={"offset":5},style={"margin-bottom":"20px"}))
-                ]) #end div
-        ]) #end div
+Create = create_component.Create()
+Login = login_component.Login()
+Success = success_component.Success()
 
 
-failed = html.Div([ dcc.Location(id='url_login_df', refresh=True)
-            , html.Div([dbc.Row(dbc.Col(html.H2('Log in Failed. Please try again'),width={"offset":5},style={"margin-top":"20px","margin-bottom" :"50px"}))
-                    , html.Br()
-                    , html.Div([login])
-                    , html.Br()
-                    , dbc.Row(dbc.Col(dbc.Button(id='back-button',color="primary", children='Go back', n_clicks=0),width={"offset":5},style={"margin-bottom":"20px"}))
-                ]) #end div
-        ]) #end div
-logout = html.Div([dcc.Location(id='logout', refresh=True)
-        , html.Br()
-        , html.Div(html.H2('You have been logged out - Please login'))
-        , html.Br()
-        , html.Div([login])
-        , html.Button(id='back-button', children='Go back', n_clicks=0)
-    ])#end div
+create = Create.create_function()
+login = Login.login_function()
+success = Success.success_function()
+failed = Login.failed_function()
+logout = Login.login_function()
+
+
+
 app.layout= html.Div([
             html.Div(id='page-content', className='content')
             ,  dcc.Location(id='url', refresh=False)
         ])
+
 # callback to reload the user object
 @login_manager.user_loader
 def load_user(user_id):
@@ -327,10 +228,11 @@ def update_output(click,in1,in2,in3):
 
 
 if __name__ == '__main__':
-    #create the table
-    #create_users_table()
-
+    #Fetching data from 
+    # dataAPI = ap.API()
+    # dataAPI.fetchData()
     c = conn.cursor()
     df = pd.read_sql('select * from users', conn)
     print(df)
     app.run_server(debug=True)
+   
