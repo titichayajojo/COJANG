@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QMainWindow, QWidget
 from register import Ui_register_2
 from email_error_control import Email_Error
 from login_control import Login
+from create_profile_control import Create_Profile
 from PySide6 import QtWidgets
 
 from PySide6.QtCore import *
@@ -48,8 +49,8 @@ class Register(QMainWindow):
                 print(key)
 
         self.close()
-        self.login = Login()
-        self.login.show()
+        self.create_profile = Create_Profile()
+        self.create_profile.show()
         
     
     def loadData(self):

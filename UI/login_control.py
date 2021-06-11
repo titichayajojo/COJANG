@@ -2,6 +2,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
 from login import Ui_Login
 from wrong_password_control import Wrong_password
+from create_profile_control import Create_Profile
 from PySide6 import QtWidgets
 
 from PySide6.QtCore import *
@@ -40,9 +41,12 @@ class Login(QMainWindow):
                     for value in dict[key]:
                         if value == 'password':
                             if dict[key][value] == self.password:
+                                self.close()
+                                self.create_profile = Create_Profile()
+                                self.create_profile.show()
                                 print("LOGIN")
                                 return
-                                
+
         self.wrong_password = Wrong_password()
         self.wrong_password.show()
 
