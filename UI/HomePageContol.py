@@ -31,8 +31,8 @@ class HomePageContoller(QMainWindow):
         self.ui.label_8.setText(self.data['email'])
         self.ui.label_11.setText(self.data['province'])
         self.ui.label_10.setText(self.data['tel']) 
-        self.status = self.data['stage']
         self.status = ""
+        self.status = self.data['stage']
 
         print(self.ui.textEdit.toPlainText())
         self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
