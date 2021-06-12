@@ -54,11 +54,11 @@ class HomePageContoller(QMainWindow):
             self.ui.radioButton_11.setEnabled(False)
             self.ui.radioButton_12.setEnabled(False)
             self.ui.radioButton_9.setEnabled(False)
-        print(self.ui.textEdit.toPlainText())
         self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
         
     
     def setCurrentProfile(self, data):
+        self.addCombo()
         self.ui.label_9.setText(data['fullname'])
         self.ui.label_8.setText(data['email'])
         self.ui.label_11.setText(data['province'])
@@ -93,7 +93,6 @@ class HomePageContoller(QMainWindow):
         self.deleteElement()
         text = self.ui.textEdit.toPlainText()
         self.searchWord = text
-        print(self.searchWord)
         self.getPeopleByName1()
         
         
@@ -113,8 +112,6 @@ class HomePageContoller(QMainWindow):
     def addElement(self):
         people_set = self.m.getAllPeople()
         # item = ItemController()
-        print("1",people_set)
-        print("2",self.n)
 
         if len(self.n) == 0:
             for i in people_set:
@@ -155,13 +152,14 @@ class HomePageContoller(QMainWindow):
     
     
     def addCombo(self):
+        self.ui.comboBox.clear()
         provices = self.m.getAllProvice()
         for i in provices:
             self.ui.comboBox.addItem(i)
         self.ui.comboBox.currentTextChanged.connect(self.on_combobox_changed)
 
-    def on_combobox_changed(self, value):
-        print("combobox changed", value)    
+
+    def on_combobox_changed(self, value): 
         self.STATE = value
         self.deleteElement()
         self.addElement()

@@ -1,6 +1,8 @@
 
 from manipulateData import *
 import currentUser
+import pickle
+
 class DataManagement():
     def __init__(self):
         self.people  = ManipulateData().loadUsersData()
@@ -20,17 +22,19 @@ class DataManagement():
         return self.people
     
     def getAllProvice(self):
+        f = open('users', 'rb')     
+        people = pickle.load(f)
         List_p = []
-        for i in self.people:
-            a = self.people[i]
+        for i in people:
+            a = people[i]
             p = a["province"]
             if p not in List_p:
                 List_p.append(p)
+        f.close()
         return List_p
 
     
     def getPeopleByName(self,n):
-        print("eiei")
         List = []
         List_name = []
         for item in self.people:
