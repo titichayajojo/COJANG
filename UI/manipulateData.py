@@ -59,8 +59,7 @@ class ManipulateData:
                 checkUser = True
 
         return checkUser 
-
-    
+ 
     def update_stage(self,stage,email):
         self.email = email
         f = open('users', 'rb')        
@@ -101,8 +100,6 @@ class ManipulateData:
                
         with open('users', 'wb') as file:
             pickle.dump(self.objs, file)
-    
-
         
 if __name__ == "__main__":
     
