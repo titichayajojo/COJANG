@@ -33,9 +33,30 @@ class HomePageContoller(QMainWindow):
         self.ui.label_10.setText(self.data['tel']) 
         self.status = ""
         self.status = self.data['stage']
-
+        
+        if self.status == 'Vacinated':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        elif self.status == 'Non-Vacinated':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        elif self.status == 'Dead':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        else:
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
         print(self.ui.textEdit.toPlainText())
         self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
+        
     
     def setCurrentProfile(self, data):
         self.ui.label_9.setText(data['fullname'])
@@ -163,14 +184,14 @@ class HomePageContoller(QMainWindow):
         
        
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    app = QtWidgets.QApplication(sys.argv)
-    home = HomePageContoller()
-    home.addCombo()
-    home.addElement()
+#     app = QtWidgets.QApplication(sys.argv)
+#     home = HomePageContoller()
+#     home.addCombo()
+#     home.addElement()
     
-    home.show()
-    sys.exit(app.exec_())
+#     home.show()
+#     sys.exit(app.exec_())
 
 
