@@ -1,9 +1,9 @@
 
-
 from data import *
 from itemController import ItemController
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
+from profile_control import Profile_view
 
 from PySide6 import QtWidgets
 from PySide6.QtCore import *
@@ -21,23 +21,28 @@ class HomePageContoller(QMainWindow):
         super().__init__()
         self.ui = MainPage()
         self.ui.setupUi(self)
+        self.ui.pushButton.clicked.connect(self.edit_profile)
         self.m = DataManagement()
         self.STATE = "Bangkok"
         self.searchWord =""
         self.n = ""
         self.data= self.m.getUserByEmail()
-        self.setCurrentProfile()
-        self.status = ""
-
-        print(self.ui.textEdit.toPlainText())
-        self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
-    
-    def setCurrentProfile(self):
         self.ui.label_9.setText(self.data['fullname'])
         self.ui.label_8.setText(self.data['email'])
         self.ui.label_11.setText(self.data['province'])
         self.ui.label_10.setText(self.data['tel']) 
         self.status = self.data['stage']
+        self.status = ""
+
+        print(self.ui.textEdit.toPlainText())
+        self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
+    
+    def setCurrentProfile(self, data):
+        self.ui.label_9.setText(data['fullname'])
+        self.ui.label_8.setText(data['email'])
+        self.ui.label_11.setText(data['province'])
+        self.ui.label_10.setText(data['tel']) 
+        self.status = data['stage']
 
         
         if self.status == 'Vacinated':
@@ -75,6 +80,11 @@ class HomePageContoller(QMainWindow):
         peoplew = self.m.getPeopleByName(self.searchWord)
         self.n = peoplew
         self.addElement()
+    
+    def edit_profile(self):
+        self.close()
+        self.profile = Profile_view(currentUser.email, self)
+        self.profile.show()
         
         
 

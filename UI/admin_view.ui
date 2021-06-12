@@ -28,25 +28,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QPushButton" name="pushButton_log_out">
-   <property name="geometry">
-    <rect>
-     <x>900</x>
-     <y>10</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 25 8pt &quot;Microsoft JhengHei UI Light&quot;;
-color: rgb(255, 255, 255);
-background-color: rgb(255, 170, 127);
-border-radius: 5px;</string>
-   </property>
-   <property name="text">
-    <string>Log out</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_status">
    <property name="geometry">
     <rect>

@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QMainWindow, QWidget
 from login import Ui_Login
 from wrong_password_control import Wrong_password
 from create_profile_control import Create_Profile
+from admin_view_control import Admin_View
 from PySide6 import QtWidgets
 import currentUser 
 from HomePageContol import *
@@ -29,7 +30,8 @@ class Login(QMainWindow):
         if self.email == 'admin@hotmail.com':
             currentUser.email = self.email
             self.close()
-            return
+            self.admin = Admin_View()
+            self.admin.show()
 
         else:
             currentUser.email = self.email

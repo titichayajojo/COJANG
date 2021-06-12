@@ -2,7 +2,6 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
 from admin_view import Ui_Admin_view
 from profile_control import Profile_view
-from login_control import Login
 from PySide6 import QtWidgets
 
 from PySide6.QtCore import *
@@ -28,28 +27,21 @@ class Admin_View(QMainWindow):
         self.province = self.ui.label_selected_province
         self.age = self.ui.label_selected_age
         self.status = self.ui.label_status
-        self.logout = self.ui.pushButton_log_out
         self.edit = self.ui.pushButton_edit_user
         self.edit.clicked.connect(self.edit_user)
-        self.logout.clicked.connect(self.logout_user)
+        self.display_all()
 
-        self.vbox = QtWidgets.QVBoxLayout() 
-        self.scroll = self.ui.scrollArea_all_user
-        self.scrollWidget = self.ui.scrollAreaWidgetContents
-        for i in self.objs:
-            bt = QtWidgets.QPushButton(i)
-            bt.setStyleSheet(u"font: 25 8pt \"Microsoft JhengHei UI Light\";\n""color: rgb(0, 0, 0);\n""background-color: rgb(255, 255, 255);\n""border-radius: 5px;")
-            bt.clicked.connect(self.user_pressed)
-            self.vbox.addWidget(bt)
-
-        self.scrollWidget.setLayout(self.vbox)
-        self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scroll.setWidgetResizable(True)
-        self.scroll.setWidget(self.scrollWidget)
+    def update_user(self,data):
+        self.name.setText("Name: " + data['fullname'])
+        self.email.setText("Email: "+ data['email'])
+        self.tel.setText("Tel: " + data['tel'])
+        self.id.setText("ID: " + data['id_number'])
+        self.nationality.setText("Nationality: " + data['nationality'])
+        self.province.setText("Province: " + data['province'])
+        self.age.setText("Age: " + data['age'])
+        self.status.setText("Status: " + data['stage'])
 
     def user_pressed(self):
-        
         self.name.setText("Name: " + self.objs[self.sender().text()]['fullname'])
         self.email.setText("Email: "+ self.objs[self.sender().text()]['email'])
         self.tel.setText("Tel: " + self.objs[self.sender().text()]['tel'])
@@ -61,13 +53,24 @@ class Admin_View(QMainWindow):
 
     def edit_user(self):
         self.close()
-        self.profile = Profile_view(self.email.text()[7:])
+        self.profile = Profile_view(self.email.text()[7:], self)
         self.profile.show()
 
-    def logout_user(self):
-        self.close()
-        self.login = Login()
-        self.login.show()
+    def display_all(self):
+        self.vbox = QtWidgets.QVBoxLayout() 
+        self.scroll = self.ui.scrollArea_all_user
+        self.scrollWidget = self.ui.scrollAreaWidgetContents
+        for i in self.objs:
+            bt = QtWidgets.QPushButton(i)
+            bt.setStyleSheet(u"font: 25 8pt \"Microsoft JhengHei UI Light\";\n""color: rgb(0, 0, 0);\n""background-color: rgb(255, 255, 255);\n""border-radius: 5px;")
+            bt.clicked.connect(self.user_pressed)
+            self.vbox.addWidget(bt)
+        
+        self.scrollWidget.setLayout(self.vbox)
+        self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setWidget(self.scrollWidget)
 
 
 

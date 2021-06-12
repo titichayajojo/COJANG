@@ -12,7 +12,7 @@ import sys
 
 class Profile_view(QMainWindow):
     # class constructor
-    def __init__(self, current):
+    def __init__(self, current, last):
         # call QWidget constructor
         super().__init__()
         self.ui = Ui_profile_view()
@@ -23,6 +23,7 @@ class Profile_view(QMainWindow):
         self.dead = self.ui.radioButton_death
         self.infected= self.ui.radioButton_infected
         self.current = current
+        self.last = last
         self.ui.label_email.setText(self.current)
 
     def radio_button_pressed(self,button):
@@ -57,10 +58,17 @@ class Profile_view(QMainWindow):
         with open('users', 'wb') as f:
             pickle.dump(self.objs, f)
         print(self.objs[self.current])
+        self.close()
+        if(currentUser.email != 'admin@hotmail.com'):
+            self.last.setCurrentProfile(self.objs[self.current])
+            self.last.show()
+        else:
+            self.last.update_user(self.objs[self.current])
+            self.last.show()
 
 if __name__ == "__main__":
         app = QtWidgets.QApplication(sys.argv)
-        profile = Profile_view()
+        profile = Profile_view("hello@hotmail.com")
         profile.show()
         sys.exit(app.exec_())
 

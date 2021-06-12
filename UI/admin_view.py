@@ -21,13 +21,6 @@ class Ui_Admin_view(object):
         Admin_view.setMinimumSize(QSize(985, 594))
         Admin_view.setMaximumSize(QSize(985, 594))
         Admin_view.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.pushButton_log_out = QPushButton(Admin_view)
-        self.pushButton_log_out.setObjectName(u"pushButton_log_out")
-        self.pushButton_log_out.setGeometry(QRect(900, 10, 75, 23))
-        self.pushButton_log_out.setStyleSheet(u"font: 25 8pt \"Microsoft JhengHei UI Light\";\n"
-"color: rgb(255, 255, 255);\n"
-"background-color: rgb(255, 170, 127);\n"
-"border-radius: 5px;")
         self.label_status = QLabel(Admin_view)
         self.label_status.setObjectName(u"label_status")
         self.label_status.setGeometry(QRect(630, 320, 151, 16))
@@ -88,7 +81,6 @@ class Ui_Admin_view(object):
 
     def retranslateUi(self, Admin_view):
         Admin_view.setWindowTitle(QCoreApplication.translate("Admin_view", u"Form", None))
-        self.pushButton_log_out.setText(QCoreApplication.translate("Admin_view", u"Log out", None))
         self.label_status.setText(QCoreApplication.translate("Admin_view", u"Status", None))
         self.pushButton_edit_user.setText(QCoreApplication.translate("Admin_view", u"Edit", None))
         self.label_selected_province.setText(QCoreApplication.translate("Admin_view", u"Province", None))
