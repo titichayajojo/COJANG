@@ -6,7 +6,7 @@ from login_control import Login
 from create_profile_control import Create_Profile
 from PySide6 import QtWidgets
 from manipulateData import ManipulateData
-import currentUser 
+import currentUser
 
 from PySide6.QtCore import *
 from PySide6.QtGui import *
