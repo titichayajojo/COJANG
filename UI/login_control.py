@@ -24,9 +24,16 @@ class Login(QMainWindow):
 
     def sign_in_pressed(self):
         self.email = self.ui.textEdit_email.toPlainText()
-        self.password = self.ui.textEdit_password.toPlainText()
-        currentUser.email = self.email
-        self.loadData()
+        self.password = self.ui.textEdit_password.text()
+
+        if self.email == 'admin@hotmail.com':
+            currentUser.email = self.email
+            self.close()
+            return
+
+        else:
+            currentUser.email = self.email
+            self.loadData()
 
     def loadData(self):
         self.objs = []
@@ -45,8 +52,9 @@ class Login(QMainWindow):
                         if value == 'password':
                             if dict[key][value] == self.password:
                                 self.close()
-                                self.create_profile = Create_Profile()
-                                self.create_profile.show()
+                                #change to main page
+                                #self.create_profile = Create_Profile()
+                                #self.create_profile.show()
                                 return
 
         self.wrong_password = Wrong_password()

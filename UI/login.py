@@ -47,11 +47,12 @@ class Ui_Login(object):
         self.label_password.setGeometry(QRect(280, 240, 91, 41))
         self.label_password.setStyleSheet(u"font: 700 13pt \"Microsoft JhengHei UI\";\n"
 "color: rgb(159, 159, 159);")
-        self.textEdit_password = QTextEdit(self.centralwidget)
+        self.textEdit_password = QLineEdit(self.centralwidget)
         self.textEdit_password.setObjectName(u"textEdit_password")
         self.textEdit_password.setGeometry(QRect(280, 280, 441, 31))
         self.textEdit_password.setStyleSheet(u"font: 700 12pt \"Microsoft JhengHei UI Light\";")
         self.textEdit_password.setInputMethodHints(Qt.ImhNone)
+        self.textEdit_password.setEchoMode(QLineEdit.Password)
         self.pushButton_sign_in = QPushButton(self.centralwidget)
         self.pushButton_sign_in.setObjectName(u"pushButton_sign_in")
         self.pushButton_sign_in.setGeometry(QRect(330, 370, 321, 41))
