@@ -145,7 +145,7 @@ class MainPage(object):
         self.label.setGeometry(QRect(10, 10, 131, 141))
         self.label.setStyleSheet(u"background-color: rgb(255, 161, 79);")
         self.pushButton = QPushButton(self.widget_2)
-        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setObjectName(u"PushButton")
         self.pushButton.setGeometry(QRect(160, 110, 111, 31))
         self.pushButton.setStyleSheet(u"background-color: rgb(255, 110, 62);")
         self.widget_4 = QWidget(self.widget)

@@ -29,6 +29,8 @@ class DialogController(QWidget):
         self.ui.label_11.setText(self.person['tel'])
         self.ui.label_12.setText(self.person['id_number'])
         self.ui.label_13.setText(self.person['nationality'])
+        pixmap = QPixmap('person2.png')
+        self.ui.label.setPixmap(pixmap)
     
 
     

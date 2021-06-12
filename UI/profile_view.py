@@ -27,7 +27,7 @@ class Ui_profile_view(object):
         self.label_name.setStyleSheet(u"font: 25 14pt \"Microsoft JhengHei UI Light\";")
         self.label_email = QLabel(profile_view)
         self.label_email.setObjectName(u"label_email")
-        self.label_email.setGeometry(QRect(400, 70, 161, 16))
+        self.label_email.setGeometry(QRect(400, 70, 200, 30))
         self.label_email.setStyleSheet(u"font: 25 14pt \"Microsoft JhengHei UI Light\";")
         self.pushButton_edit_profile = QPushButton(profile_view)
         self.pushButton_edit_profile.setObjectName(u"pushButton_edit_profile")
@@ -136,9 +136,6 @@ class Ui_profile_view(object):
         self.horizontalLayout.addWidget(self.radioButton_death)
 
         self.label = QLabel(profile_view)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(160, 180, 49, 16))
-        self.label.setPixmap(QPixmap(u"user1.png"))
         self.label_2 = QLabel(profile_view)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(340, 50, 51, 51))

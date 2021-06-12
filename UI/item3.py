@@ -133,6 +133,6 @@ class Item3(object):
         self.radioButton_6.setText(QCoreApplication.translate("Form", u"Non-Vacinated", None))
         self.radioButton_7.setText(QCoreApplication.translate("Form", u"Dead", None))
         self.radioButton_8.setText(QCoreApplication.translate("Form", u"Infected", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"PushButton", None))
+        self.pushButton.setText(QCoreApplication.translate("Form", u"See Full Profile", None))
     # retranslateUi
 
