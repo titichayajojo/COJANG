@@ -4,9 +4,9 @@
 
 from DialogController import DialogController
 from item3 import Item3
-from item2 import Item2
+
 from os import stat
-from item import Item
+
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
 
@@ -54,9 +54,10 @@ class ItemController(QWidget):
             self.ui.radioButton_5.setEnabled(False)
             self.ui.radioButton_6.setEnabled(False)
             self.ui.radioButton_7.setEnabled(False)
-
+        
         self.ui.pushButton.clicked.connect(lambda: self.buttonOnClicked())
-
+        pixmap = QPixmap('person2.png')
+        self.ui.label_39.setPixmap(pixmap)
     def buttonOnClicked(self):
         dia = DialogController()
         dia.show()

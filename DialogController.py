@@ -3,9 +3,9 @@
 
 
 from item3 import Item3
-from item2 import Item2
+
 from os import stat
-from item import Item
+
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
 

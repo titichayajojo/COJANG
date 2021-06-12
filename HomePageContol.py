@@ -23,7 +23,7 @@ class HomePageContoller(QMainWindow):
         self.ui.setupUi(self)
         self.m = DataManagement()
         self.STATE = "Bangkok"
-    
+        
         
     def addElement(self):
         
