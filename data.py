@@ -21,8 +21,6 @@ class DataManagement():
         "Status" : "Vacinated",
         "Email" : "Jojo@kmitl.ac.th",
     
-       
-        
 
     },
     "p03" : {
@@ -81,6 +79,17 @@ class DataManagement():
       
 
     },
+    "p09" : {
+        "Name" : "Bum3",
+        "Surname" : "Pliasub",
+        "Tel" : "0945462171",
+        "STATE" : "Pee Pee",
+        "Status" : "Dead",
+        "Email" : "Bum2@kmitl.ac.th",
+      
+
+    }
+    
 
 }
     def getAllPeople(self):
@@ -96,4 +105,21 @@ class DataManagement():
         return List_p
 
     
-            
+    def getPeopleByName(self,n):
+        print("eiei")
+        List = []
+        List_name = []
+        for item in self.people:
+            # print(item)
+            person = self.people[item]
+            s = person['Name']
+            # print(s)    
+            if s.rfind(n) != -1:
+                List.append(self.people[item])
+        
+        for j in List:
+            List_name.append(j['Name'])
+        return List_name
+
+        
+        
