@@ -1,11 +1,9 @@
 
 import pickle
-from create_profile_control import Create_Profile
 from email_error_control import Email_Error
-from login_control import Login
 
 class ManipulateData:
-    def __init__(self,fullname,email,password,tel = '-',stage = '-',address = '-',province = '-'):
+    def __init__(self,fullname = '-',email ='-',password = '-',tel = '-',stage = '-',address = '-',province = '-',age = '-'):
         self.fullname = fullname
         self.email = email
         self.password = password
@@ -13,9 +11,10 @@ class ManipulateData:
         self.stage = stage
         self.address = address
         self.province = province
+        self.age = age
 
     def storeData(self):
-        user = {'fullname' : self.fullname, 'email': self.email, 'password': self.password, 'tel' : self.tel, 'stage' : self.stage, 'address' : self.address, 'province' : self.province}
+        user = {'fullname' : self.fullname, 'email': self.email, 'password': self.password, 'tel' : self.tel, 'stage' : self.stage, 'address' : self.address, 'province' : self.province, 'age' : self.age}
         # database
         db = {}
         print(user)
@@ -28,14 +27,8 @@ class ManipulateData:
         pickle.dump(db, dbfile)                     
         dbfile.close()
 
-        for dict in self.objs:
-            for key in dict:
-                print(key)
+        return True
 
-        self.create_profile = Create_Profile()
-        self.create_profile.show()
-        
-    
     def loadData(self,email):
         self.email_error = Email_Error()
         self.email = email
@@ -57,14 +50,41 @@ class ManipulateData:
 
         if checkUser == False:
             return False
+
+    
+    def updateStage(self,stage,email):
+        self.email = email
+        f = open('users', 'rb')        
+        self.objs = pickle.load(f)
+
+        for key in self.objs:
+            if self.objs[key]['email'] == self.email:
+                self.objs[key]['stage'] = stage
+               
+        
+
+        with open('users', 'wb') as f:
+            pickle.dump(self.objs, f)  
+
+    def update_details(self,age,tel,address,province,email):
+        self.email = email
+        f = open('users', 'rb') 
+        self.objs = pickle.load(f)    
+       
+        for key in self.objs:
+            if self.objs[key]['email'] == self.email:
+                self.objs[key]['age'] = age
+                self.objs[key]['tel'] = tel
+                self.objs[key]['address'] = address
+                self.objs[key]['province'] = province
+               
+
+        with open('users', 'wb') as file:
+            pickle.dump(self.objs, file)
+
         
 if __name__ == "__main__":
-    objs = []
+    
     f = open('users', 'rb')     
-    while 1:
-        try:
-            objs.append(pickle.load(f))
-        except EOFError:
-            break
-
-    print(objs)
+    loaded_dictionary = pickle.load(f)
+    print(loaded_dictionary)

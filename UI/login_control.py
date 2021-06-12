@@ -4,6 +4,7 @@ from login import Ui_Login
 from wrong_password_control import Wrong_password
 from create_profile_control import Create_Profile
 from PySide6 import QtWidgets
+import currentUser 
 
 from PySide6.QtCore import *
 from PySide6.QtGui import *
@@ -19,10 +20,12 @@ class Login(QMainWindow):
         self.ui = Ui_Login()
         self.ui.setupUi(self)
         self.ui.pushButton_sign_in.clicked.connect(self.sign_in_pressed)
+        
 
     def sign_in_pressed(self):
         self.email = self.ui.textEdit_email.toPlainText()
         self.password = self.ui.textEdit_password.toPlainText()
+        currentUser.email = self.email
         self.loadData()
 
     def loadData(self):
@@ -44,7 +47,6 @@ class Login(QMainWindow):
                                 self.close()
                                 self.create_profile = Create_Profile()
                                 self.create_profile.show()
-                                print("LOGIN")
                                 return
 
         self.wrong_password = Wrong_password()
