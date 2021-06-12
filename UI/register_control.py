@@ -73,6 +73,8 @@ class Register(QMainWindow):
 
         if checkUser == False:
             self.storeData()
+
+        print(self.objs)
         
 
     
