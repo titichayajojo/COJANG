@@ -54,7 +54,12 @@ class HomePageContoller(QMainWindow):
             self.ui.comboBox.addItem(i)
         self.ui.comboBox.currentTextChanged.connect(self.on_combobox_changed)
 
-  
+    def on_combobox_changed(self, value):
+        print("combobox changed", value)
+        self.STATE = value
+        self.deleteElement()
+        self.addElement()
+
 
     def deleteElement(self):
         for i in reversed(range(self.ui.verticalLayout.count())): 
