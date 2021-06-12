@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>985</width>
+    <height>594</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>985</width>
+    <height>594</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>985</width>
+    <height>594</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>431</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 48pt &quot;Microsoft JhengHei UI&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Create Profile</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>110</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Status</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>150</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Vaccine</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name_3">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>110</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Phone number</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name_4">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>200</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Address</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name_5">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>370</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Province</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_full_name_6">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>190</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 13pt &quot;Microsoft JhengHei UI&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Age</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_infected">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>120</y>
+      <width>89</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Infected</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_not_infected">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>120</y>
+      <width>89</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Not infected</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_infected_2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>160</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Injected</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup_2</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_not_injected">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>160</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Not Injected</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">buttonGroup_2</string>
+    </attribute>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_phone_number">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>150</y>
+      <width>441</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Microsoft JhengHei UI Light&quot;;
+</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>Enter your phone number</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_address">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>240</y>
+      <width>441</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Microsoft JhengHei UI Light&quot;;
+</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>Enter your address</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_province">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>410</y>
+      <width>441</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Microsoft JhengHei UI Light&quot;;
+</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>Enter your province</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_age">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>200</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 12pt &quot;Microsoft JhengHei UI Light&quot;;
+</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="placeholderText">
+     <string>Enter your age</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_create">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>500</y>
+      <width>321</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 700 16pt &quot;Microsoft JhengHei UI&quot;;
+background-color: rgb(255, 170, 127);
+color: rgb(255, 255, 255);
+border-radius: 15px;</string>
+    </property>
+    <property name="text">
+     <string>Create</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>260</y>
+      <width>231</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../create_virus2.png</pixmap>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>985</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
+ </buttongroups>
+</ui>
