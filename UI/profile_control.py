@@ -12,7 +12,7 @@ import sys
 
 class Profile_view(QMainWindow):
     # class constructor
-    def __init__(self):
+    def __init__(self, current):
         # call QWidget constructor
         super().__init__()
         self.ui = Ui_profile_view()
@@ -22,8 +22,7 @@ class Profile_view(QMainWindow):
         self.non_vaccinated = self.ui.radioButton_n_vaccinated
         self.dead = self.ui.radioButton_death
         self.infected= self.ui.radioButton_infected
-        
-        self.current = '1'
+        self.current = current
         self.ui.label_email.setText(self.current)
 
     def radio_button_pressed(self,button):
