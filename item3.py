@@ -13,29 +13,30 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
 
-class Item(object):
+class Item3(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(865, 300)
         self.widget_5 = QWidget(Form)
         self.widget_5.setObjectName(u"widget_5")
-        self.widget_5.setGeometry(QRect(140, 80, 616, 150))
+        self.widget_5.setGeometry(QRect(60, 50, 741, 170))
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_5.sizePolicy().hasHeightForWidth())
         self.widget_5.setSizePolicy(sizePolicy)
-        self.widget_5.setMinimumSize(QSize(0, 150))
+        self.widget_5.setMinimumSize(QSize(0, 170))
+        self.widget_5.setMaximumSize(QSize(16777215, 170))
         self.widget_5.setStyleSheet(u"background-color: rgb(255, 218, 143);\n"
 "border-radius: 15px;")
         self.label_39 = QLabel(self.widget_5)
         self.label_39.setObjectName(u"label_39")
-        self.label_39.setGeometry(QRect(10, 10, 111, 121))
+        self.label_39.setGeometry(QRect(20, 10, 151, 151))
         self.label_39.setStyleSheet(u"background-color: rgb(167, 167, 167);")
         self.layoutWidget_8 = QWidget(self.widget_5)
         self.layoutWidget_8.setObjectName(u"layoutWidget_8")
-        self.layoutWidget_8.setGeometry(QRect(130, 30, 101, 84))
+        self.layoutWidget_8.setGeometry(QRect(190, 30, 101, 84))
         self.verticalLayout_11 = QVBoxLayout(self.layoutWidget_8)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
         self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
@@ -65,7 +66,7 @@ class Item(object):
 
         self.layoutWidget_9 = QWidget(self.widget_5)
         self.layoutWidget_9.setObjectName(u"layoutWidget_9")
-        self.layoutWidget_9.setGeometry(QRect(250, 30, 191, 86))
+        self.layoutWidget_9.setGeometry(QRect(290, 30, 191, 86))
         self.verticalLayout_12 = QVBoxLayout(self.layoutWidget_9)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
@@ -91,7 +92,7 @@ class Item(object):
 
         self.groupBox = QGroupBox(self.widget_5)
         self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setGeometry(QRect(450, 20, 151, 101))
+        self.groupBox.setGeometry(QRect(520, 20, 151, 101))
         self.radioButton_5 = QRadioButton(self.groupBox)
         self.radioButton_5.setObjectName(u"radioButton_5")
         self.radioButton_5.setGeometry(QRect(10, 20, 89, 20))
@@ -104,6 +105,12 @@ class Item(object):
         self.radioButton_8 = QRadioButton(self.groupBox)
         self.radioButton_8.setObjectName(u"radioButton_8")
         self.radioButton_8.setGeometry(QRect(10, 80, 89, 20))
+        self.pushButton = QPushButton(self.widget_5)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(600, 130, 111, 31))
+        self.pushButton.setStyleSheet(u"font: 700 10pt \"Microsoft JhengHei UI\";\n"
+"border-radius: 15px;\n"
+"background-color: rgb(255, 135, 65);")
 
         self.retranslateUi(Form)
 
@@ -114,7 +121,7 @@ class Item(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.label_39.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.label_40.setText(QCoreApplication.translate("Form", u"Name", None))
-        self.label_41.setText(QCoreApplication.translate("Form", u"Email", None))
+        self.label_41.setText(QCoreApplication.translate("Form", u"Surname", None))
         self.label_42.setText(QCoreApplication.translate("Form", u"Tel", None))
         self.label_43.setText(QCoreApplication.translate("Form", u"STATE", None))
         self.label_44.setText(QCoreApplication.translate("Form", u"empty", None))
@@ -126,5 +133,6 @@ class Item(object):
         self.radioButton_6.setText(QCoreApplication.translate("Form", u"Non-Vacinated", None))
         self.radioButton_7.setText(QCoreApplication.translate("Form", u"Dead", None))
         self.radioButton_8.setText(QCoreApplication.translate("Form", u"Infected", None))
+        self.pushButton.setText(QCoreApplication.translate("Form", u"PushButton", None))
     # retranslateUi
 

@@ -2,6 +2,9 @@
 
 
 
+from DialogController import DialogController
+from item3 import Item3
+from item2 import Item2
 from os import stat
 from item import Item
 from PySide6 import QtWidgets
@@ -17,16 +20,17 @@ import sys
 class ItemController(QWidget):
     def __init__(self,person):
         QWidget.__init__(self,None)
-        self.ui = Item()
+        self.ui = Item3()
         self.ui.setupUi(self)
         self.name = person['Name'] 
         self.surname = person['Surname']
         self.tel = person['Tel']
         self.state =  person['STATE']
         self.status = person['Status']
+        self.email = person['Email']
 
         self.ui.label_44.setText(self.name)
-        self.ui.label_45.setText(self.surname)
+        self.ui.label_45.setText(self.email)
         self.ui.label_46.setText(self.tel)
         self.ui.label_47.setText(self.state)
 
@@ -50,6 +54,14 @@ class ItemController(QWidget):
             self.ui.radioButton_5.setEnabled(False)
             self.ui.radioButton_6.setEnabled(False)
             self.ui.radioButton_7.setEnabled(False)
+
+        self.ui.pushButton.clicked.connect(lambda: self.buttonOnClicked())
+
+    def buttonOnClicked(self):
+        dia = DialogController()
+        dia.show()
+        sys.exit(dia.exec_())
+        
 
         
 

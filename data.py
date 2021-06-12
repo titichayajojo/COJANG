@@ -6,6 +6,7 @@ class DataManagement():
     "p01" : {
         "Name" : "Boon",
         "Surname" : "Pliasub",
+        "Email" : "Boon@kmitl.ac.th",
         "Tel" : "0945462171",
         "STATE" : "Bangkok",
         "Status" : "Dead",
@@ -18,6 +19,7 @@ class DataManagement():
         "Tel" : "0945462171",
         "STATE" : "Samut Sakorn",
         "Status" : "Vacinated",
+        "Email" : "Jojo@kmitl.ac.th",
     
        
         
@@ -28,7 +30,8 @@ class DataManagement():
         "Surname" : "eueu",
         "Tel" : "0945462171",
         "STATE" : "Lumpun",
-         "Status" : "Non-Vacinated"
+         "Status" : "Non-Vacinated",
+         "Email" : "Tee@kmitl.ac.th",
 
     },
     "p04" : {
@@ -36,7 +39,8 @@ class DataManagement():
         "Surname" : "pipi",
         "Tel" : "0945462171",
         "STATE" : "Chiang Mai",
-         "Status" : "Infected"
+         "Status" : "Infected",
+         "Email" : "Rit@kmitl.ac.th",
 
     },
     "p05" : {
@@ -44,7 +48,8 @@ class DataManagement():
         "Surname" : "soo",
         "Tel" : "0945462171",
         "STATE" : "Lao",
-         "Status" : "Infected"
+         "Status" : "Infected",
+         "Email" : "Hbeat@kmitl.ac.th",
 
     },
     "p06" : {
@@ -52,7 +57,8 @@ class DataManagement():
         "Surname" : "pl",
         "Tel" : "0945462171",
         "STATE" : "Pee Pee",
-         "Status" : "Infected"
+         "Status" : "Infected",
+         "Email" : "Unn@kmitl.ac.th",
 
     },
     "p07" : {
@@ -61,6 +67,7 @@ class DataManagement():
         "Tel" : "0945462171",
         "STATE" : "Pee Pee",
         "Status" : "Infected",
+        "Email" : "Bum@kmitl.ac.th",
       
 
     },
@@ -70,6 +77,7 @@ class DataManagement():
         "Tel" : "0945462171",
         "STATE" : "Pee Pee",
         "Status" : "Dead",
+        "Email" : "Bum2@kmitl.ac.th",
       
 
     },

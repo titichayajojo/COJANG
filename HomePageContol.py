@@ -1,6 +1,5 @@
 
 
-
 from data import *
 from itemController import ItemController
 from PySide6 import QtWidgets
@@ -24,7 +23,7 @@ class HomePageContoller(QMainWindow):
         self.ui.setupUi(self)
         self.m = DataManagement()
         self.STATE = "Bangkok"
-        
+    
         
     def addElement(self):
         
@@ -55,7 +54,7 @@ class HomePageContoller(QMainWindow):
         self.ui.comboBox.currentTextChanged.connect(self.on_combobox_changed)
 
     def on_combobox_changed(self, value):
-        print("combobox changed", value)
+        print("combobox changed", value)    
         self.STATE = value
         self.deleteElement()
         self.addElement()
