@@ -1,7 +1,7 @@
 
 import pickle
 from email_error_control import Email_Error
-
+import pprint
 class ManipulateData:
     def __init__(self,fullname = '-',email ='-',password = '-',tel = '-',stage = '-',address = '-',province = '-',age = '-', sex = '-', id_number = '-' , nationality = '-'):
         self.fullname = fullname
@@ -100,9 +100,14 @@ class ManipulateData:
                
         with open('users', 'wb') as file:
             pickle.dump(self.objs, file)
+
+    def loadUsersData(self):
+        f = open('users', 'rb')     
+        loaded_dictionary = pickle.load(f)
+        return loaded_dictionary
         
 if __name__ == "__main__":
     
     f = open('users', 'rb')     
     loaded_dictionary = pickle.load(f)
-    print(loaded_dictionary)
+    pprint.pprint(loaded_dictionary)

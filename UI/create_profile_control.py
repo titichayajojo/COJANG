@@ -1,4 +1,5 @@
 
+
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QMainWindow, QWidget
 from create_profile import Ui_MainWindow
@@ -6,7 +7,7 @@ from manipulateData import ManipulateData
 import currentUser
 from PySide6 import QtWidgets
 
-
+from HomePageContol import HomePageContoller
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -56,6 +57,11 @@ class Create_Profile(QMainWindow):
         self.manipulateData.update_details(self.age,self.tel,self.address,self.province,self.id_number,self.nationality,currentUser.email)
 
         self.close()
+        self.homePage = HomePageContoller()
+        self.homePage.addCombo()
+        self.homePage.addElement()
+        self.homePage.show()
+
     
     def radio_button_pressed(self,button):
         if button.text() == "Vaccinated":

@@ -9,6 +9,7 @@ from PySide6 import QtWidgets
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
+from currentUser import *
 
 import sys
 from board3 import *
@@ -24,9 +25,43 @@ class HomePageContoller(QMainWindow):
         self.STATE = "Bangkok"
         self.searchWord =""
         self.n = ""
+        self.data= self.m.getUserByEmail()
+        self.setCurrentProfile()
+        self.status = ""
 
         print(self.ui.textEdit.toPlainText())
         self.ui.textEdit.textChanged.connect(self.on_textedit_changed)
+    
+    def setCurrentProfile(self):
+        self.ui.label_9.setText(self.data['fullname'])
+        self.ui.label_8.setText(self.data['email'])
+        self.ui.label_11.setText(self.data['province'])
+        self.ui.label_10.setText(self.data['tel']) 
+        self.status = self.data['stage']
+
+        
+        if self.status == 'Vacinated':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        elif self.status == 'Non-Vacinated':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        elif self.status == 'Dead':
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+        else:
+            self.ui.radioButton_10.toggle()
+            self.ui.radioButton_11.setEnabled(False)
+            self.ui.radioButton_12.setEnabled(False)
+            self.ui.radioButton_9.setEnabled(False)
+
+
 
     def on_textedit_changed(self):
         self.deleteElement()
@@ -53,7 +88,7 @@ class HomePageContoller(QMainWindow):
         if len(self.n) == 0:
             for i in people_set:
                 person = people_set[i]
-                if person['STATE'] == self.STATE:
+                if person['province'] == self.STATE:
                     object = ItemController(person)
                     object.setObjectName(u"widget_5")
                     object.setGeometry(QRect(140, 80, 616, 150))
@@ -69,7 +104,7 @@ class HomePageContoller(QMainWindow):
         else:
             for i in people_set:
                 person = people_set[i]
-                if person['STATE'] == self.STATE  and person['Name'] in self.n:
+                if person['province'] == self.STATE  and person['fullname'] in self.n:
                     object = ItemController(person)
                     object.setObjectName(u"widget_5")
                     object.setGeometry(QRect(140, 80, 616, 150))
@@ -106,7 +141,6 @@ class HomePageContoller(QMainWindow):
     def deleteElement(self):
         for i in reversed(range(self.ui.verticalLayout.count())): 
             self.ui.verticalLayout.itemAt(i).widget().setParent(None)
-
 
   
     

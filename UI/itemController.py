@@ -22,17 +22,21 @@ class ItemController(QWidget):
         QWidget.__init__(self,None)
         self.ui = Item3()
         self.ui.setupUi(self)
-        self.name = person['Name'] 
+        self.person = person
+        self.name = self.person['fullname'] 
        
-        self.tel = person['Tel']
-        self.state =  person['STATE']
-        self.status = person['Status']
-        self.email = person['Email']
+        self.tel = self.person['tel']
+        self.state =  self.person['province']
+        self.status = self.person['stage']
+        self.email = self.person['email']
 
         self.ui.label_44.setText(self.name)
         self.ui.label_45.setText(self.email)
         self.ui.label_46.setText(self.tel)
         self.ui.label_47.setText(self.state)
+
+        
+
 
         if self.status == 'Vacinated':
             self.ui.radioButton_5.toggle()
@@ -59,10 +63,9 @@ class ItemController(QWidget):
         pixmap = QPixmap('person2.png')
         self.ui.label_39.setPixmap(pixmap)
     def buttonOnClicked(self):
-        dia = DialogController()
-        dia.show()
-        sys.exit(dia.exec_())
-        
+        self.dia = DialogController(self.person)
+        self.dia.show()
+       
 
         
 

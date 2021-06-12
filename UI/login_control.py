@@ -5,7 +5,7 @@ from wrong_password_control import Wrong_password
 from create_profile_control import Create_Profile
 from PySide6 import QtWidgets
 import currentUser 
-
+from HomePageContol import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -52,9 +52,10 @@ class Login(QMainWindow):
                         if value == 'password':
                             if dict[key][value] == self.password:
                                 self.close()
-                                #change to main page
-                                #self.create_profile = Create_Profile()
-                                #self.create_profile.show()
+                                self.homePage = HomePageContoller()
+                                self.homePage.addCombo()
+                                self.homePage.addElement()
+                                self.homePage.show()
                                 return
 
         self.wrong_password = Wrong_password()

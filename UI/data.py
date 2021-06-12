@@ -1,97 +1,21 @@
 
+from manipulateData import *
+import currentUser
 class DataManagement():
     def __init__(self):
-      
-        self.people = {
-    "p01" : {
-        "Name" : "Boon",
-        "Surname" : "Pliasub",
-        "Email" : "Boon@kmitl.ac.th",
-        "Tel" : "0945462171",
-        "STATE" : "Bangkok",
-        "Status" : "Dead",
-      
+        self.people  = ManipulateData().loadUsersData()
+       
 
-    },
-    "p02" : {
-        "Name" : "Jojo",
-        "Surname" : "eiei",
-        "Tel" : "0945462171",
-        "STATE" : "Samut Sakorn",
-        "Status" : "Vacinated",
-        "Email" : "Jojo@kmitl.ac.th",
-    
+    def getUserByEmail(self):
+        self.email = currentUser.email
+        f = open('users', 'rb')
+        self.objs = pickle.load(f)
 
-    },
-    "p03" : {
-        "Name" : "Tee",
-        "Surname" : "eueu",
-        "Tel" : "0945462171",
-        "STATE" : "Lumpun",
-         "Status" : "Non-Vacinated",
-         "Email" : "Tee@kmitl.ac.th",
+        for key in self.objs:
+            if self.objs[key]['email'] == self.email:
+                return self.objs[key]
 
-    },
-    "p04" : {
-        "Name" : "Rit",
-        "Surname" : "pipi",
-        "Tel" : "0945462171",
-        "STATE" : "Chiang Mai",
-         "Status" : "Infected",
-         "Email" : "Rit@kmitl.ac.th",
 
-    },
-    "p05" : {
-        "Name" : "Hbeat",
-        "Surname" : "soo",
-        "Tel" : "0945462171",
-        "STATE" : "Lao",
-         "Status" : "Infected",
-         "Email" : "Hbeat@kmitl.ac.th",
-
-    },
-    "p06" : {
-        "Name" : "Unn",
-        "Surname" : "pl",
-        "Tel" : "0945462171",
-        "STATE" : "Pee Pee",
-         "Status" : "Infected",
-         "Email" : "Unn@kmitl.ac.th",
-
-    },
-    "p07" : {
-        "Name" : "Bum",
-        "Surname" : "Pliasub",
-        "Tel" : "0945462171",
-        "STATE" : "Pee Pee",
-        "Status" : "Infected",
-        "Email" : "Bum@kmitl.ac.th",
-      
-
-    },
-     "p08" : {
-        "Name" : "Bum2",
-        "Surname" : "Pliasub",
-        "Tel" : "0945462171",
-        "STATE" : "Pee Pee",
-        "Status" : "Dead",
-        "Email" : "Bum2@kmitl.ac.th",
-      
-
-    },
-    "p09" : {
-        "Name" : "Bum3",
-        "Surname" : "Pliasub",
-        "Tel" : "0945462171",
-        "STATE" : "Pee Pee",
-        "Status" : "Dead",
-        "Email" : "Bum2@kmitl.ac.th",
-      
-
-    }
-    
-
-}
     def getAllPeople(self):
         return self.people
     
@@ -99,7 +23,7 @@ class DataManagement():
         List_p = []
         for i in self.people:
             a = self.people[i]
-            p = a["STATE"]
+            p = a["province"]
             if p not in List_p:
                 List_p.append(p)
         return List_p
@@ -112,13 +36,13 @@ class DataManagement():
         for item in self.people:
             # print(item)
             person = self.people[item]
-            s = person['Name']
+            s = person['fullname']
             # print(s)    
             if s.rfind(n) != -1:
                 List.append(self.people[item])
         
         for j in List:
-            List_name.append(j['Name'])
+            List_name.append(j['fullname'])
         return List_name
 
         
