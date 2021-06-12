@@ -36,7 +36,6 @@ class Create_Profile(QMainWindow):
         
         self.manipulateData = ManipulateData()
 
-        
         self.ui.pushButton_create.clicked.connect(self.create_pressed)
 
     def create_pressed(self):
