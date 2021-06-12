@@ -1,7 +1,7 @@
 
-
 class DataManagement():
     def __init__(self):
+      
         self.people = {
     "p01" : {
         "Name" : "Boon",

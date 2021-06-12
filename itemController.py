@@ -23,7 +23,7 @@ class ItemController(QWidget):
         self.ui = Item3()
         self.ui.setupUi(self)
         self.name = person['Name'] 
-        self.surname = person['Surname']
+       
         self.tel = person['Tel']
         self.state =  person['STATE']
         self.status = person['Status']
